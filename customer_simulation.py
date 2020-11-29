@@ -11,13 +11,18 @@ class CustomerArrival:
 	'''
 	Assume a simple poisson process with a unit of time
 	defined as an hour
-	The class returns a probability of arrival in a given unit of time
+	The class method should return an integer amount of arrivals
+	Poisson parameter assumptions
 	'''
 	
 	# We assume that average arrivals per hour is 3
 	# Or, k = 3 and lambda = 1
 	def __init__(self, k = 3, lambd = 1):
 		self.prob_arrival = (lambd ** k) * math.exp(-lambd) / math.factorial(lambd)
+		
+	
+	def calculate_arrivals(self):
+		pass
 
 
 class CustomerChoice:
