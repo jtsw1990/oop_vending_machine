@@ -1,4 +1,4 @@
-import pandas as pd
+import csv
 
 
 class DrinksData:
@@ -8,7 +8,12 @@ class DrinksData:
     '''
 
     def __init__(self, filepath):
-        self.df = pd.read_csv(filepath)
+        self.df = []
+        with open(filepath, "r") as file:
+        	my_reader = csv.reader(file, delimiter=",")
+        	next(my_reader)
+        	for row in my_reader:
+        		self.df.append(row)
 
 
 class VendingMachine:
@@ -23,10 +28,11 @@ class VendingMachine:
         self._current_earnings = 0
         self._drinks_list = DrinksData(filepath).df
         self._stock_list = {
-            row["name"]: [row["price_per_unit"], row["no_of_units"]]
-            for index, row in self._drinks_list.iterrows()
+            row[0]: [float(row[1]), int(row[2])]
+            for row in self._drinks_list
         }
-        self.drinks_displayed = list(set(self._drinks_list["name"]))
+        # Exposed as interface
+        self.drinks_displayed = list(set(self._stock_list.keys()))
         self._current_stock = sum([
             value[-1] for key, value in self._stock_list.items()
         ])
@@ -41,10 +47,9 @@ class VendingMachine:
 
 
 if __name__ == "__main__":
-    vending_one = VendingMachine("drinks_list.csv")
-    vending_one.dispense_drink("coke")
-    print(vending_one._stock_list)
-    print(vending_one._current_earnings)
-    vending_one.dispense_drink("fanta_grape")
-    print(vending_one._stock_list)
-    print(vending_one._current_earnings)
+	test_run = VendingMachine("drinks_list.csv")
+	print(test_run._current_stock)
+	test_run.dispense_drink("coke")
+	print(test_run._stock_list)
+	print(test_run._current_stock)
+	print(test_run._current_earnings)
