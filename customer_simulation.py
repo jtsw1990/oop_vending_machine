@@ -15,15 +15,43 @@ class CustomerArrival:
 	Poisson parameter assumptions
 	'''
 	
-	# We assume that average arrivals per hour is 3
-	# Or, k = 3 and lambda = 1
-	def __init__(self, k = 3, lambd = 1):
-		self.prob_arrival = (lambd ** k) * math.exp(-lambd) / math.factorial(lambd)
+	def __init__(self, lambda_param=3):
+		'''
+		Initializes a customer object specifying parameters for a 
+		Poisson distribution. Defaults to lambda=3. This is interpreted
+		as having an average of 3 customers arriving in a given unit
+		of time. This is assumed to be 1 hour.
+		'''
+		self.lambda_param = lambda_param
 		
 	
-	def calculate_arrivals(self):
-		pass
-
+	def pdf_func(self, k):
+		
+		'''
+		Currently using a Poisson distribution assumption
+		but can be extended to any discrete pdf
+		'''
+		return (self.lambda_param**k * math.exp(-self.lambda_param)) / (math.factorial(k))
+		
+	
+	def calculate_arrivals(self, pdf_func=pdf_func):
+		
+		'''
+		Calculates the number of arrivals in a given hour
+		based on the assumed pdf. This is done by taking a RV~U(0, 1)
+		and using a while loop to calculate the CDF.
+		TODO: Update documentation
+		'''
+		
+		self._rng = random.uniform(0, 1)
+		self.arrival_counter = 0
+		self._cdf_counter = self.pdf_func(self.arrival_counter)
+		
+		
+		while self._cdf_counter < self._rng:
+			self.arrival_counter += 1
+			self._cdf_counter += self.pdf_func(self.arrival_counter)
+			
 
 class CustomerChoice:
 	
@@ -57,6 +85,7 @@ class CustomerChoice:
 if __name__ == "__main__":
 
 	sample_customer = CustomerChoice()
-	choice = sample_customer.choose_drink(["coke", "sprite", "fanta"])
-	print(choice)
+	arrival_pattern = CustomerArrival()
+	print(arrival_pattern.calculate_arrivals())
+	print(arrival_pattern.arrival_counter)
 	
