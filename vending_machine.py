@@ -38,21 +38,22 @@ class VendingMachine:
         ])
         # TODO: insert try except to assert < max units
 
-    def dispense_drink(self, drink_idx):
-				
-				'''
-				Receives an integer input from customer object
-				that simulates drink choice given what is displayed
-				from the drinks_displayed interface
-				'''
+    def dispense_drink(self, drink_name):
+    		
+        '''
+			  Receives an string input from customer object
+			  that simulates drink choice given what is displayed
+			  from the drinks_displayed interface
+			  '''
         # TODO: insert test to check index
         # TODO: insert try except bounds
-        self._stock_list[self.drinks_displayed[drink_idx]][-1] -= 1
-        self._current_earnings += self._stock_list[self.drinks_displayed[drink_idx]][0]
+        self._stock_list[drink_name][-1] -= 1
+        self._current_earnings += self._stock_list[drink_name][0]
 
 
 if __name__ == "__main__":
 	test_run = VendingMachine("drinks_list.csv")
-	#print(test_run._current_stock)
-	test_run.dispense_drink(3)
+	print(test_run._stock_list)
+	test_run.dispense_drink("coke")
+	print(test_run._stock_list)
 

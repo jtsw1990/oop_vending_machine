@@ -36,23 +36,27 @@ class CustomerChoice:
 	
 	# Note: Would this depend on what's available in the machine?
 	
-	def __init__(self, drinks_display_count):
+	def __init__(self):
 		
 		'''
 		Each instance would depend on what the customer sees on the front end.
 		If there is no more coke, then coke would not be one of the choices.
 		'''
+		pass
 	
-		self.customer_rng = random.randint(0, drinks_display_count - 1)
+	
+	def choose_drink(self, drinks_display_list):
+		'''
+		This is currently random but can be extended in the future if required
+		'''
+		return random.choice(drinks_display_list)
 		
 		
 
 
 if __name__ == "__main__":
 
-	test = CustomerChoice(5)
-	print(test.customer_rng)
-	test_2 = CustomerArrival()
-	print(test_2.prob_arrival)
-	
+	sample_customer = CustomerChoice()
+	choice = sample_customer.choose_drink(["coke", "sprite", "fanta"])
+	print(choice)
 	
