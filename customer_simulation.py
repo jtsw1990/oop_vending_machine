@@ -52,6 +52,8 @@ class CustomerArrival:
 			self.arrival_counter += 1
 			self._cdf_counter += self.pdf_func(self.arrival_counter)
 			
+		return self.arrival_counter
+			
 
 class CustomerChoice:
 	

@@ -35,6 +35,7 @@ class VendingMachine:
         }
         # Exposed as interface
         self.drinks_displayed = list(set(self._stock_list.keys()))
+        # Why does this not update? 
         self._current_stock = sum([
             value[-1] for key, value in self._stock_list.items()
         ])
@@ -61,6 +62,7 @@ class VendingMachine:
         # TODO: insert try except bounds
         self._stock_list[drink_name][-1] -= 1
         self._current_earnings += self._stock_list[drink_name][0]
+        self._current_stock = sum([value[-1] for key, value in self._stock_list.items()])
 
 
 if __name__ == "__main__":
