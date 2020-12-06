@@ -10,10 +10,10 @@ class DrinksData:
     def __init__(self, filepath):
         self.df = []
         with open(filepath, "r") as file:
-        	my_reader = csv.reader(file, delimiter=",")
-        	next(my_reader)
-        	for row in my_reader:
-        		self.df.append(row)
+            my_reader = csv.reader(file, delimiter=",")
+            next(my_reader)
+            for row in my_reader:
+                self.df.append(row)
 
 
 class VendingMachine:
@@ -23,7 +23,7 @@ class VendingMachine:
     '''
 
     def __init__(self, filepath):
-				
+
         print("__init__ was being called here")
         self.filepath = filepath
         self._max_storage = 200
@@ -35,39 +35,35 @@ class VendingMachine:
         }
         # Exposed as interface
         self.drinks_displayed = list(set(self._stock_list.keys()))
-        # Why does this not update? 
+        # Why does this not update?
         self._current_stock = sum([
             value[-1] for key, value in self._stock_list.items()
         ])
         # TODO: insert try except to assert < max units
-        
-    
+
     def __repr__(self):
-    	print("__repr__ was being called here")
-    	return "VendingMachine({!r})".format(self.filepath)
-    	
+        print("__repr__ was being called here")
+        return "VendingMachine({!r})".format(self.filepath)
+
     def __str__(self):
-    	pass
-    	
-    	
+        pass
 
     def dispense_drink(self, drink_name):
-    		
         '''
-			  Receives an string input from customer object
-			  that simulates drink choice given what is displayed
-			  from the drinks_displayed interface
-			  '''
+                          Receives an string input from customer object
+                          that simulates drink choice given what is displayed
+                          from the drinks_displayed interface
+                          '''
         # TODO: insert test to check index
         # TODO: insert try except bounds
         self._stock_list[drink_name][-1] -= 1
         self._current_earnings += self._stock_list[drink_name][0]
-        self._current_stock = sum([value[-1] for key, value in self._stock_list.items()])
+        self._current_stock = sum([value[-1]
+                                   for key, value in self._stock_list.items()])
 
 
 if __name__ == "__main__":
-	test_run = VendingMachine("drinks_list.csv")
-	print(test_run._stock_list)
-	test_run.dispense_drink("coke")
-	print(test_run._stock_list)
-
+    test_run = VendingMachine("drinks_list.csv")
+    print(test_run._stock_list)
+    test_run.dispense_drink("coke")
+    print(test_run._stock_list)
