@@ -7,7 +7,7 @@ from datetime import datetime
 import os
 
 
-PERIOD_IN_HOURS = 24 * 7
+PERIOD_IN_HOURS = 24
 ts = datetime.now().strftime("%d-%m-%y_%H-%M")
 output_folder = "./analytics/{}".format(ts)
 
