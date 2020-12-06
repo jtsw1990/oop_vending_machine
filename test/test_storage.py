@@ -6,16 +6,22 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from vending_machine.vending_machine import VendingMachine, DataReader
 
 
-class TestingStorageBounds(unittest.TestCase):
+class TestingCapacty(unittest.TestCase):
 	
 	def test_capacity_input(self):
-		self.assertRaises(TypeError, 1 + "str")
+		for scenario in np.linspace(-2, 2, 9):
+			if scenario < 0:
+				self.assertRaises(ValueError, VendingMachine, scenario)
+			elif scenario % 1 != 0:
+				self.assertRaises(TypeError, VendingMachine, scenario)
+			else:
+				self.assertEqual(scenario, VendingMachine(scenario).max_capacity)
 				
-		#test_instance = VendingMachine(150)
-		#max_capacity = test_instance.max_capacity
-		#self.assertEqual(isinstance(max_capacity, (int, float)), True)
+	def test_capacity_bound(self):
+		# TODO: create csv to for negative test case
+		pass
+		
 
 
 if __name__ == "__main__":
 	unittest.main()
-	
