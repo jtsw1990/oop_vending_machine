@@ -23,10 +23,12 @@ class VendingMachine:
     '''
 
     def __init__(self, filepath):
-
+				
+        print("__init__ was being called here")
+        self.filepath = filepath
         self._max_storage = 200
         self._current_earnings = 0
-        self._drinks_list = DrinksData(filepath).df
+        self._drinks_list = DrinksData(self.filepath).df
         self._stock_list = {
             row[0]: [float(row[1]), int(row[2])]
             for row in self._drinks_list
@@ -37,6 +39,16 @@ class VendingMachine:
             value[-1] for key, value in self._stock_list.items()
         ])
         # TODO: insert try except to assert < max units
+        
+    
+    def __repr__(self):
+    	print("__repr__ was being called here")
+    	return "VendingMachine({!r})".format(self.filepath)
+    	
+    def __str__(self):
+    	pass
+    	
+    	
 
     def dispense_drink(self, drink_name):
     		
