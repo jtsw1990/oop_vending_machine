@@ -8,12 +8,12 @@ from vending_machine import vending_machine.VendingMachine
 class TestingStorageBounds(unittest.TestCase):
 
     def test_max_storage(self):
-		vm_instance = VendingMachine("drinks_list.csv")
-		total_stock = vm_instance._current_stock
-		max_storage = total_stock - 1
-		self.assertTrue(
-		total_stock <= max_storage, "Stock list exceeds vending machine max storage"
-		)
+			vm_instance = VendingMachine("drinks_list.csv")
+			total_stock = vm_instance._current_stock
+			max_storage = total_stock - 1
+			self.assertTrue(
+				total_stock <= max_storage, "Stock list exceeds vending machine max storage"
+			)
 		'''
         with self.assertRaises(ValueError) as exception_context:
             add_fish_to_aquarium(fish_list=too_many_fish)
