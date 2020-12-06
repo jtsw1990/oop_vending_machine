@@ -1,13 +1,18 @@
-# from oop_vending_machine import vending_machine
+import unittest
 
 
-def test_max_storage():
-    '''
-    Unit test to ensure that input does not
-    exceed expected capacity of machine
-    '''
-    print("this ran")
+class TestingStorageBounds(unittest.TestCase):
+
+	def test_max_storage(self):
+    	'''
+    	Unit test to ensure that input does not
+    	exceed expected capacity of machine
+    	'''
+    	
+    	self.assertEqual(5, 3)
+    	
+    	print("this ran")
 
 
-def test_positive_storage():
-    print("this ran")
+	def  test_min_storage():
+    	print("this ran")
