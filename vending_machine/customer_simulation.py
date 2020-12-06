@@ -79,7 +79,11 @@ class CustomerChoice:
 		'''
 		This is currently random but can be extended in the future if required
 		'''
-		return random.choice(drinks_display_list)
+		try:
+			return random.choice(drinks_display_list)
+		except IndexError:
+			 return None
+
 		
 		
 

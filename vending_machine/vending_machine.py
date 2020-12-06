@@ -1,7 +1,7 @@
 import csv
 
 
-class DrinksData:
+class DataReader:
 	'''
 	Object to read in initial drinks data set
 	to be used as input in VendingMachine class
@@ -17,7 +17,9 @@ class DrinksData:
 
 
 class VendingMachine:
-	
+	'''
+	Insert doc string here
+	'''
 				
 	def __init__(self, max_capacity):
 		print("__init__ is being called here")
@@ -49,7 +51,7 @@ class VendingMachine:
 			self.__max_capacity = max_capacity
 							
 	def load_drinks(self, filepath):
-		self.drink_list = DrinksData(filepath).df
+		self.drink_list = DataReader(filepath).df
 		if self.stock_list is None:
 			self.stock_list = {
 			row[0]: [float(row[1]), int(row[2])]
@@ -63,22 +65,46 @@ class VendingMachine:
 		else:
 			self.current_stock = current_stock
 	
-	# Do we need this?
 	def display_stock(self):
-		self.drinks_displayed = list(set(self.stock_list.keys()))
+		self.drinks_displayed = [
+			x[0] for x in list(self.stock_list.items()) if x[-1][-1] > 0
+			]
 		return self.drinks_displayed
 
 	def dispense_drink(self, drink_name):
 		
-		# Given that customer choice depends on available list
-		# Do we still need validation at this step?
-		self.stock_list[drink_name][-1] -= 1
-		self.current_earnings += self.stock_list[drink_name][0]
-		self.current_stock = sum([value[-1]
-			for key, value in self.stock_list.items()])
+		'''
+		Method to simulate a vending machine object
+		dispensing a drink. Returns drink_name as a string if available.
+		Returns None if out of stock.
+		'''
+		try:
+			if self.stock_list[drink_name][-1] > 0:
+				self.stock_list[drink_name][-1] -= 1
+				self.current_earnings += self.stock_list[drink_name][0]
+				self.current_stock = sum([value[-1]
+					for key, value in self.stock_list.items()])
+				return drink_name
+			else:
+				return None
+		except KeyError:
+			print("Machine out of stock")
+			return None
+		
 
 
 if __name__ == "__main__":
 	test = VendingMachine(200)
 	test.load_drinks("drinks_list.csv")
 	test.display_stock()
+	for i in range(150):
+		test.dispense_drink("coke")
+		test.dispense_drink("ice_lemon_tea")
+		test.dispense_drink("fanta_orange")
+		test.dispense_drink("fanta_grape")
+		test.dispense_drink("sprite")
+		test.dispense_drink("pepsi")
+		test.dispense_drink("mountain_dew")
+	print(test.stock_list)
+	print(test.display_stock())
+
