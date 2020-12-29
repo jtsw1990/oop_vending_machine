@@ -1,4 +1,5 @@
 # oop_vending_machine
+
 Simple E2E data project from vending machine simulation to generation of analytics
 
 
@@ -21,14 +22,17 @@ Premise of the project is the simulation of a typical vending machine dispensing
 
 - git clone this repository into your machine
 - run ```pip install -r requirements.txt``` to get dependencies
+- open ```config.json``` to set inputs for machine capacity and number of hours to simulate
+- open ```./vending_machine/drinks_list.csv``` to define the stock of drinks available at the start
 - run ```python main.py``` to start simulation 
+- open ```./analytics/dd_mm_yy-hh_mm``` folder to review sales report
 
 ## File Structure
-
 
 |File/Folder|Description|
 |:------|-----:|
 |main.py|Main loop that runs the simulation|
+|config.json| Configuration file containing input variables for max capacity of vending machine, and number of hours to simulate|
 |vending_machine|Folder containing vending machin, customer, and reporting scripts|
 |analytics|Folder containing sales report outputs|
-
+|test| Folder containing all the unit test scripts. This uses the built-in unittest module|

@@ -5,13 +5,18 @@ import datetime
 import csv
 from datetime import datetime
 import os
+import json
 
 
-PERIOD_IN_HOURS = 24
+with open("config.json") as f:
+    config = json.load(f)
+
+
+PERIOD_IN_HOURS = config["HOURS"]
 ts = datetime.now().strftime("%d-%m-%y_%H-%M")
 output_folder = "./analytics/{}".format(ts)
 
-vending_one = VendingMachine(200)
+vending_one = VendingMachine(config["MAX_CAPACITY"])
 vending_one.load_drinks("./vending_machine/drinks_list.csv")
 sample_customer = CustomerArrival()
 sample_customer_choice = CustomerChoice()
