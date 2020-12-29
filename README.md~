@@ -20,15 +20,9 @@ Premise of the project is the simulation of a typical vending machine dispensing
 ## How to use
 
 - git clone this repository into your machine
-- run ```pip install -r requirements.txt``` to get dependencies
 - run ```python main.py``` to start simulation 
 
 ## File Structure
 
 
-|File/Folder|Description|
-|:------|-----:|
-|main.py|Main loop that runs the simulation|
-|vending_machine|Folder containing vending machin, customer, and reporting scripts|
-|analytics|Folder containing sales report outputs|
-
+|Folder|Description| 
